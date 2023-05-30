@@ -1,0 +1,20 @@
+.cell{
+  width: 30px;
+  height: 30px;
+  margin-bottom: 5px;
+  border: 1px solid #b4afaf;
+  display: grid;
+  border-radius: 20px;
+}
+.border{
+  background: #000000;
+}
+.road{
+  background: #ffffff;
+}
+.collision{
+  background: #0dff00;
+}
+.ball{
+  background: #ff0000;
+}
