@@ -1,15 +1,15 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 export default function Board(){
     const [board, setBoard] = useState([
         ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
         ['X', '1', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
         ['X', '0', '0', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
-        ['X', '0', '0', 'X', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
+        ['X', '0', '0', '0', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
         ['X', '0', '0', '0', '0', '0', 'X', 'X', 'X', 'X', 'X', 'X'],
         ['X', '0', '0', '0', '0', '0', '0', 'X', 'X', 'X', 'X', 'X'],
         ['X', '0', '0', '0', '0', '0', '0', '0', 'X', 'X', 'X', 'X'],
-        ['X', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'X'],
+        ['X', '0', '0', '0', '0', '0', '0', 'X', '0', '0', '0', 'X'],
         ['X', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', 'X'],
         ['X', '0', '0', '0', 'X', '0', '0', '0', '0', 'Y', '0', 'X'],
         ['X', '0', '0', 'X', 'X', 'X', '0', '0', '0', '0', '0', 'X'],
@@ -22,6 +22,7 @@ export default function Board(){
     const toRepeat = board[1].length;
     // TO DO! FOR LOOP THAT MAKING THIS ARRAY FOR ME!!!
     const borderPositions = [
+        [5, 5],
       [
           0,
           0
@@ -116,10 +117,6 @@ export default function Board(){
       ],
       [
           2,
-          2
-      ],
-      [
-          2,
           4
       ],
       [
@@ -153,10 +150,6 @@ export default function Board(){
       [
           3,
           0
-      ],
-      [
-          3,
-          3
       ],
       [
           3,
@@ -422,8 +415,11 @@ export default function Board(){
       changeCoordinates();
     }
     function randomVector(){
+      const randomizeVector = ['rightDown', 'leftDown', 'leftTop', 'rightTop'];
+      var myVector = randomizeVector[Math.floor(Math.random()*randomizeVector.length)];
+      console.log(myVector)
       if(vector === 'rightDown'){
-        return setVector('leftDown');
+        return setVector(myVector);
       } else if(vector === 'leftDown'){
         return setVector('leftTop');
       } else if(vector === 'leftTop'){
@@ -433,28 +429,50 @@ export default function Board(){
       }
     }
 
+
+    // TO DO! Piłka uderza w kolizję i ogarnia to dopiero po 2 kolejnych ruchach
+    // FIRST NUMBER IS Y, SECOND IS X !!!!!!!!!!!!!!!!!!!!!!!!!!!
     function changeCoordinates(){
       let newBoard = board;
 
       for(let i = 0; i < borderPositions.length; i++){
-          if(currentPosition[0] === borderPositions[i][0] && currentPosition[1] === borderPositions[i][1]){
-            setCollision(true);
-          }
+            if(currentPosition[1] === borderPositions[i][0] && currentPosition[0] === borderPositions[i][1]){
+                setCollision(true);
+            }
       }
-      console.log(board[currentPosition[0]][currentPosition[1]])
-      console.log(currentPosition)
-      if(newBoard[currentPosition[0]][currentPosition[1]] === '1' && vector === 'rightDown'){
-        newBoard[currentPosition[0]][currentPosition[1]] = '0';
-        newBoard[currentPosition[0] + 1][currentPosition[1] + 1] = '1';
+
+      if(board[currentPosition[1]][currentPosition[0]] === '1' && vector === 'rightDown'){
+        newBoard[currentPosition[1]][currentPosition[0]] = '0';
+        newBoard[currentPosition[1] + 1][currentPosition[0] + 1] = '1';
         setBoard(newBoard)
         if(collision === true){
-          setCollision(false);
-          randomVector();
+            randomVector();
+            setCollision(false);
         }
-      } else if(newBoard[currentPosition[0]][currentPosition[1]] === '1' && vector === 'leftDown'){
-        newBoard[currentPosition[0]][currentPosition[1]] = '0';
-        newBoard[currentPosition[0] + 1][currentPosition[1] - 1] = '1';
+      } else if(board[currentPosition[1]][currentPosition[0]] === '1' && vector === 'leftDown'){
+        newBoard[currentPosition[1]][currentPosition[0]] = '0';
+        newBoard[currentPosition[1] + 1][currentPosition[0] - 1] = '1';
         setBoard(newBoard)
+        if(collision === true){
+            randomVector();
+            setCollision(false);
+        }
+      } else if(board[currentPosition[1]][currentPosition[0]] === '1' && vector === 'leftTop'){
+        newBoard[currentPosition[1]][currentPosition[0]] = '0';
+        newBoard[currentPosition[1] - 1][currentPosition[0] - 1] = '1';
+        setBoard(newBoard)
+        if(collision === true){
+            randomVector();
+            setCollision(false);
+        }
+      } else if(board[currentPosition[1]][currentPosition[0]] === '1' && vector === 'rightTop'){
+        newBoard[currentPosition[1]][currentPosition[0]] = '0';
+        newBoard[currentPosition[1] - 1][currentPosition[0] + 1] = '1';
+        setBoard(newBoard)
+        if(collision === true){
+            randomVector();
+            setCollision(false);
+        }
       }
     }
 
@@ -473,7 +491,7 @@ export default function Board(){
         }
         </div>
         <button onClick={findCurrentPosition}>FIND</button>
-        <button onClick={changeCoordinates}>CHANGE</button>
+        <button onClick={randomVector}>CHANGE</button>
         <button onClick={run}>RUN</button>
         </>
       )
