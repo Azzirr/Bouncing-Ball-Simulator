@@ -411,21 +411,28 @@ export default function Board(){
     //   }
     // }
     function run(){
-      findCurrentPosition();
-      changeCoordinates();
+        findCurrentPosition();
+        changeCoordinates();
     }
     function randomVector(){
       const randomizeVector = ['rightDown', 'leftDown', 'leftTop', 'rightTop'];
-      var myVector = randomizeVector[Math.floor(Math.random()*randomizeVector.length)];
-      console.log(myVector)
       if(vector === 'rightDown'){
+        let arr = [...randomizeVector].filter(item => item !== 'rightDown');
+        console.log(arr)
+        let myVector = arr[Math.floor(Math.random()*arr.length)];
         return setVector(myVector);
       } else if(vector === 'leftDown'){
-        return setVector('leftTop');
+        let arr = [...randomizeVector].filter(item => item !== 'leftDown');
+        let myVector = arr[Math.floor(Math.random()*arr.length)];
+        return setVector(myVector);
       } else if(vector === 'leftTop'){
-        return setVector('rightTop');
+        let arr = [...randomizeVector].filter(item => item !== 'leftTop');
+        let myVector = arr[Math.floor(Math.random()*arr.length)];
+        return setVector(myVector);
       } else if(vector === 'rightTop'){
-        return setVector('rightDown');
+        let arr = [...randomizeVector].filter(item => item !== 'rightTop');
+        let myVector = arr[Math.floor(Math.random()*arr.length)];
+        return setVector(myVector);
       }
     }
 
