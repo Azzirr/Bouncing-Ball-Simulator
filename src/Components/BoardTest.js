@@ -1,6 +1,6 @@
 import {useState} from 'react';
 
-export default function Board(){
+export default function BoardTest(){
     const [board, setBoard] = useState([
         ['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
         ['X', '1', '0', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'],
@@ -50,20 +50,20 @@ export default function Board(){
         let currentDirection = [ball.directionX, ball.directionY]
         const directionsWithoutCurrent = directions.filter(direction => JSON.stringify(direction) !== JSON.stringify(currentDirection));
         let randomDirection = directionsWithoutCurrent[Math.floor(Math.random()*directionsWithoutCurrent.length)];
-        ball.directionX = randomDirection[0];
-        ball.directionY = randomDirection[1];
+        ball.directionX = -randomDirection[0];
+        ball.directionY = -randomDirection[1];
     }
 
     function run(){
         findCurrentPosition();
         setInterval(() => {
-            let newBoard = [...board];
             function moveDiv(cell){
                 newBoard[ball.positionY][ball.positionX] = cell.toString();
                 setBoard(newBoard)
             }
             const nextX = ball.positionX + ball.directionX;
             const nextY = ball.positionY + ball.directionY;
+            let newBoard = [...board];
             moveDiv(0);
             if (board[nextY][nextX] === 'X') {
             //  Ball hit a wall, change direction
@@ -78,7 +78,7 @@ export default function Board(){
               ball.positionY = nextY;
             }
             moveDiv(1);
-        }, 300);
+        }, 100);
     }
 
       return(
