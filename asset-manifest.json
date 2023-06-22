@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Bouncing-Ball-Simulator/static/css/main.7cce9bb0.css",
-    "main.js": "/Bouncing-Ball-Simulator/static/js/main.db1b2760.js",
+    "main.js": "/Bouncing-Ball-Simulator/static/js/main.cd9fd36b.js",
     "index.html": "/Bouncing-Ball-Simulator/index.html",
     "main.7cce9bb0.css.map": "/Bouncing-Ball-Simulator/static/css/main.7cce9bb0.css.map",
-    "main.db1b2760.js.map": "/Bouncing-Ball-Simulator/static/js/main.db1b2760.js.map"
+    "main.cd9fd36b.js.map": "/Bouncing-Ball-Simulator/static/js/main.cd9fd36b.js.map"
   },
   "entrypoints": [
     "static/css/main.7cce9bb0.css",
-    "static/js/main.db1b2760.js"
+    "static/js/main.cd9fd36b.js"
   ]
 }
