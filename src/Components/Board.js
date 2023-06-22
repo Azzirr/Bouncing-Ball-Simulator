@@ -95,7 +95,6 @@ export default function Board(){
         }
         </div>
         <button onClick={run}>RUN</button>
-        <button onClick={randomizeDirection}>Randomize</button>
         </>
       )
 }
