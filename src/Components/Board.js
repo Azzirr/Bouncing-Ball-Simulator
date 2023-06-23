@@ -54,14 +54,15 @@ export default function Board(){
         ball.directionY = randomDirection[1];
     }
 
+    function moveDiv(cell){
+        let newBoard = [...board];
+        newBoard[ball.positionY][ball.positionX] = cell.toString();
+        setBoard(newBoard)
+    }
+
     function run(){
         findCurrentPosition();
         setInterval(() => {
-            let newBoard = [...board];
-            function moveDiv(cell){
-                newBoard[ball.positionY][ball.positionX] = cell.toString();
-                setBoard(newBoard)
-            }
             const nextX = ball.positionX + ball.directionX;
             const nextY = ball.positionY + ball.directionY;
             moveDiv(0);
